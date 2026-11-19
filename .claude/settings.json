@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "first-attempt": {
+      "source": { "source": "github", "repo": "tony19prince68-rgb/first-attempt" }
+    }
+  },
+  "enabledPlugins": {
+    "prompt-master@first-attempt": true
+  }
+}

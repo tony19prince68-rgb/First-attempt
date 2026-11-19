@@ -1,0 +1,5 @@
+{
+  "name": "first-attempt",
+  "owner": { "name": "tony19prince68-rgb" },
+  "plugins": [{ "name": "prompt-master", "source": "./mods/prompt-master" }]
+}
