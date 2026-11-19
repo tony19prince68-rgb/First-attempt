@@ -17,3 +17,5 @@ In a Claude Code session, type:
 ```
 
 Answer `y` to add the marketplace, then pick a scope.
+
+In this repository it is already on: `.claude/settings.json` adds this marketplace and enables `prompt-master@first-attempt`, so Claude Code offers to install it when you open the project.
