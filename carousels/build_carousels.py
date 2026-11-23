@@ -173,6 +173,19 @@ C.append(('try-this-before-you-scroll', 'teal', [
 ]))
 
 
+# graphite sketch set for each carousel: sketches/<key>-NN.png, one per slide (see sketches.js)
+SKETCHES = {'5-lies-about-waking-up': 'lies', 'what-we-call-it': 'call', 'body-noticed-first': 'body',
+            'sentences-that-keep-you-asleep': 'sentences', 'questions-you-avoid': 'questions',
+            'try-this-before-you-scroll': 'try'}
+
+
+def with_sketch(section, key, i):
+    path = f'sketches/{key}-{i:02d}.png'
+    if not (HERE / path).exists():
+        return section
+    return section.replace('<section ', f'<section data-sketch="../{path}" ', 1)
+
+
 def build():
     out = []
     for slug, theme, slides in C:
@@ -180,9 +193,12 @@ def build():
         vars_ = ';'.join(f'--{k}:{v}' for k, v in t.items())
         folder = HERE / f'{DATE}-{slug}'
         folder.mkdir(exist_ok=True)
+        key = SKETCHES.get(slug)
+        if key:
+            slides = [with_sketch(s, key, i) for i, s in enumerate(slides, 1)]
         (folder / 'slides.html').write_text(
             f'<!doctype html><html><head><meta charset="utf-8"><style>:root{{{vars_}}}{CSS}</style></head>'
-            f'<body>{"".join(slides)}</body></html>')
+            f'<body>{"".join(slides)}<script src="../sketches.js"></script></body></html>')
         out.append(folder)
     return out
 
